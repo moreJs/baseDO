@@ -1,9 +1,11 @@
 ### baseDo
 
 - 背景
+
    我们在基于 redux 和 redux-observable 做数据层解决方案的时候，面临最大的问题是，代码和逻辑分离，我们通常会写多个reducer和epic，然后在不同的js文件中进行切换，整个逻辑不连贯，很容易被打断。
 
 - 意义
+
    因此，我们提出了 baseDO 的概念，baseDO对象整合 action 和 reducer 和 epic ，使得我们对单个数据对象的逻辑可以进行内聚。同时提供一些基本的增、删、改、查等常用接口.
 
 - how to use ?
@@ -36,3 +38,10 @@ const a = store();
 
 
 ```
+
+- todo list
+   - 补充测试用例
+
+- version plan
+   - v1 基本功能实现
+  
