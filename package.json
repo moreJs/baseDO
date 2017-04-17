@@ -1,0 +1,26 @@
+{
+  "name": "@ali/basedao",
+  "version": "1.0.0",
+  "description": "数据层一体式解决方案",
+  "main": "build/index.js",
+  "scripts": {
+    "dev": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.alibaba-inc.com:alisports-fed/baseDO.git"
+  },
+  "keywords": [
+    "redux",
+    "redux-observable"
+  ],
+  "author": "jianlei.hjl@alibaba-inc.com",
+  "license": "MIT",
+  "dependencies": {
+    "redux": "^3.6.0",
+    "redux-observable": "^0.14.1",
+    "reflect-metadata": "^0.1.10",
+    "rxjs": "^5.3.0"
+  }
+}
