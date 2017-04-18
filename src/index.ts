@@ -14,9 +14,9 @@ const factoryForWrite = (type: Symbol) => (name: string) => (target: any, proper
     Reflect.defineMetadata(type, metadata, __globalDao__);
 };
 
-const factoryForRead = (type: Symbol, originFn: any) => {
+const factoryForRead = (type: Symbol, originFn: any, transform: (origin:any) => {}) => {
     const metadata = Reflect.getOwnMetadata(type, __globalDao__);
-    return originFn(mapToObject(metadata));
+    return originFn(transform(metadata));
 }
 
 
@@ -27,10 +27,11 @@ export const epic = factoryForWrite(E);
 
 // 对外暴露构建store对象的方法
 export const store = () => {
-    const reduces = factoryForRead(R, combineReducers);
-    const epics = factoryForRead(E, combineEpics);
+    const reduces = factoryForRead(R, combineReducers, mapToObject);
+    const epics = factoryForRead(E, combineEpics, origin => origin.values());
 
-    const epicMiddleware = createEpicMiddleware(epics);
+
+    const epicMiddleware = createEpicMiddleware(...epics);
     const enhancer = compose(
         applyMiddleware(epicMiddleware)
     );
