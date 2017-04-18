@@ -28,7 +28,7 @@ export const epic = factoryForWrite(E);
 // 对外暴露构建store对象的方法
 export const store = () => {
     const reduces = factoryForRead(R, combineReducers, mapToObject);
-    const epics = factoryForRead(E, combineEpics, origin => origin.values());
+    const epics = factoryForRead(E, combineEpics, origin => [...origin.values()]);
 
 
     const epicMiddleware = createEpicMiddleware(epics);
