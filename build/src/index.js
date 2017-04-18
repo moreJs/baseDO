@@ -10,7 +10,7 @@ const factoryForWrite = (type) => (name) => (target, propertyKey, descriptor) =>
     metadata.set(name, descriptor.value);
     Reflect.defineMetadata(type, metadata, constant_1.__globalDao__);
 };
-const factoryForRead = (type, originFn) => () => {
+const factoryForRead = (type, originFn) => {
     const metadata = Reflect.getOwnMetadata(type, constant_1.__globalDao__);
     return originFn(util_1.mapToObject(metadata));
 };

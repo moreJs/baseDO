@@ -14,7 +14,7 @@ const factoryForWrite = (type: Symbol) => (name: string) => (target: any, proper
     Reflect.defineMetadata(type, metadata, __globalDao__);
 };
 
-const factoryForRead = (type: Symbol, originFn: any) => () => {
+const factoryForRead = (type: Symbol, originFn: any) => {
     const metadata = Reflect.getOwnMetadata(type, __globalDao__);
     return originFn(mapToObject(metadata));
 }
