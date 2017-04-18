@@ -5,6 +5,8 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 
 import { __globalDao__, reducer as R, epic as E } from './constant';
+import { mapToObject } from './util';
+
 
 const factoryForWrite = (type: Symbol) => (name: string) => (target: any, propertyKey: string, descriptor: any) => {
     const metadata = Reflect.getOwnMetadata(type, __globalDao__) || new Map();
@@ -14,7 +16,7 @@ const factoryForWrite = (type: Symbol) => (name: string) => (target: any, proper
 
 const factoryForRead = (type: Symbol, originFn: any) => () => {
     const metadata = Reflect.getOwnMetadata(type, __globalDao__);
-    return originFn(metadata);
+    return originFn(mapToObject(metadata));
 }
 
 
