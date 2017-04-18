@@ -21,7 +21,7 @@ exports.epic = factoryForWrite(constant_1.epic);
 exports.store = () => {
     const reduces = factoryForRead(constant_1.reducer, redux_1.combineReducers, util_1.mapToObject);
     const epics = factoryForRead(constant_1.epic, redux_observable_1.combineEpics, origin => origin.values());
-    const epicMiddleware = redux_observable_1.createEpicMiddleware(...epics);
+    const epicMiddleware = redux_observable_1.createEpicMiddleware(epics);
     const enhancer = redux_1.compose(redux_1.applyMiddleware(epicMiddleware));
     return redux_1.createStore(reduces, enhancer);
 };

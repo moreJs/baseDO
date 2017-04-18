@@ -31,7 +31,7 @@ export const store = () => {
     const epics = factoryForRead(E, combineEpics, origin => origin.values());
 
 
-    const epicMiddleware = createEpicMiddleware(...epics);
+    const epicMiddleware = createEpicMiddleware(epics);
     const enhancer = compose(
         applyMiddleware(epicMiddleware)
     );
