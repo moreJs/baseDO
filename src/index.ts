@@ -5,7 +5,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 
 import { __globalDao__, reducer as R, epic as E } from './constant';
-import { mapToObject } from './util';
+import { mapToObject, mapToValues } from './util';
 
 
 const factoryForWrite = (type: Symbol) => (name: string) => (target: any, propertyKey: string, descriptor: any) => {
@@ -28,7 +28,7 @@ export const epic = factoryForWrite(E);
 // 对外暴露构建store对象的方法
 export const store = () => {
     const reduces = factoryForRead(R, combineReducers, mapToObject);
-    const epics = factoryForRead(E, combineEpics, origin => [...origin.values()]);
+    const epics = factoryForRead(E, combineEpics, mapToValues);
 
 
     const epicMiddleware = createEpicMiddleware(epics);

@@ -7,4 +7,11 @@ exports.mapToObject = map => {
     }
     return obj;
 };
+exports.mapToValues = map => {
+    let value = [...map.values()];
+    if (value.length == 1) {
+        return value[0];
+    }
+    return value;
+};
 //# sourceMappingURL=util.js.map

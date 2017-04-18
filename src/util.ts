@@ -7,3 +7,11 @@ export const mapToObject = map => {
     }
     return obj;
 }
+
+export const mapToValues = map => {
+    let value = [...map.values()];
+    if(value.length == 1) {
+        return value[0];
+    }
+    return value;
+}
