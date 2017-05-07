@@ -1,16 +1,58 @@
 'use strict';
 
+import { ajax } from 'rxjs/observable/dom/ajax';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/map';
+
 import "reflect-metadata";
+
+
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 
 import { __globalDao__, reducer as R, epic as E } from './constant';
-import { mapToObject, mapToValues } from './util';
+import { mapToObject, mapToValues, defaultResponseProcesser } from './util';
 
 
-const factoryForWrite = (type: Symbol) => (name: string) => (target: any, propertyKey: string, descriptor: any) => {
+const fetchGenerator = (config = {} , metadata) => {
+
+    const finallyConfig = {
+        ...defaultResponseProcesser,
+        ...config
+    };
+
+    return actions$ => 
+        actions$.ofType(finallyConfig.filter_type)
+                .mergeMap(action => {
+                    return ajax.getJSON(finallyConfig.url)
+                })
+                .map(response => {
+                    if(finallyConfig.isError(response)) {
+                        return {
+                            type: finallyConfig.error_action_type,
+                            payload: response
+                        }
+                    }else {
+                        return {
+                            type: finallyConfig.sucess_action_type,
+                            payload: finallyConfig.result(response)
+                        }
+                    }
+                })
+}
+
+
+const factoryForWrite = (type: Symbol, needGenerator?: boolean) => (name: string, config: Object) => (target: any, propertyKey: string, descriptor: any) => {
     const metadata = Reflect.getOwnMetadata(type, __globalDao__) || new Map();
-    metadata.set(name, descriptor.value);
+    let value = null;
+
+    if(needGenerator) {
+        value = fetchGenerator(config, metadata);
+    }else {
+        value = descriptor.value;
+    }
+    
+    metadata.set(name, value);
     Reflect.defineMetadata(type, metadata, __globalDao__);
 };
 
@@ -20,9 +62,12 @@ const factoryForRead = (type: Symbol, originFn: any, transform: (origin:any) => 
 }
 
 
-// 对外暴露的两个装饰器
+
+// 对外暴露的装饰器
 export const reducer = factoryForWrite(R);
 export const epic = factoryForWrite(E);
+export const fetch = factoryForWrite(E, true);
+
 
 
 // 对外暴露构建store对象的方法

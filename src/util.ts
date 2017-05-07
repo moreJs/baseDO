@@ -15,3 +15,19 @@ export const mapToValues = map => {
     }
     return value;
 }
+
+export const defaultResponseProcesser = {
+    filter_type: '@@pleace_holder@@',
+    sucess_action_type: '@@pleace_holder@@',
+    error_action_type: '@@pleace_holder@@',
+    url: '@@pleace_holder@@',
+    isSuccess: response => {
+        return response && response.suceess;
+    },
+    isError: response => {
+        return response && response.error;
+    },
+    result: response => {
+        return response && response.body;
+    }
+};
