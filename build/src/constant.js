@@ -1,5 +1,4 @@
 'use strict';
-Object.defineProperty(exports, "__esModule", { value: true });
 // 元数据挂载到这个对象上
 exports.__globalDao__ = {};
 // symbols 常量
