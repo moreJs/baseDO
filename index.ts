@@ -1,3 +1,3 @@
-import { reducer, epic, store } from './src/index';
+import { reducer, epic, fetch, store } from './src/index';
 
-export { reducer, epic, store };
+export { reducer, epic, fetch, store };
