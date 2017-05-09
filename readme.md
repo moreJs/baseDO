@@ -88,6 +88,11 @@ const s = store();
 
 ```
 
+
+
+- 实际的demo
+   - http://gitlab.alibaba-inc.com/alisports-fed/baseDO-demo/blob/master/do/list.ts
+
 - todo list
    - 补充测试用例
 
