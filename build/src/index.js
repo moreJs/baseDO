@@ -50,8 +50,7 @@ const factoryForWrite = (type, needGenerator) => (name, config) => (target, prop
 };
 const factoryForRead = (type, originFn, transform) => {
     const metadata = Reflect.getOwnMetadata(type, constant_1.__globalDao__);
-    const transformData = transform(metadata) || [];
-    return originFn(...transformData);
+    return originFn(transform(metadata));
 };
 // 对外暴露的装饰器
 exports.reducer = factoryForWrite(constant_1.reducer);

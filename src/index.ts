@@ -58,8 +58,7 @@ const factoryForWrite = (type: Symbol, needGenerator?: boolean) => (name: string
 
 const factoryForRead = (type: Symbol, originFn: any, transform: (origin:any) => {}) => {
     const metadata = Reflect.getOwnMetadata(type, __globalDao__);
-    const transformData:any = transform(metadata) || [];
-    return originFn(...transformData);
+    return originFn(transform(metadata));
 }
 
 
