@@ -56,9 +56,13 @@ const factoryForWrite = (type: Symbol, needGenerator?: boolean) => (name: string
     Reflect.defineMetadata(type, metadata, __globalDao__);
 };
 
-const factoryForRead = (type: Symbol, originFn: any, transform: (origin:any) => {}) => {
+const factoryForRead = (type: Symbol, originFn: any, transform: (origin:any) => {[Symbol.iterator]()}, isEpic: boolean) => {
     const metadata = Reflect.getOwnMetadata(type, __globalDao__);
-    return originFn(transform(metadata));
+    if(isEpic) {
+        return originFn(...transform(metadata));
+    }else {
+        return originFn(transform(metadata));
+    }
 }
 
 
@@ -72,8 +76,8 @@ export const fetch = factoryForWrite(E, true);
 
 // 对外暴露构建store对象的方法
 export const store = () => {
-    const reduces = factoryForRead(R, combineReducers, mapToObject);
-    const epics = factoryForRead(E, combineEpics, mapToValues);
+    const reduces = factoryForRead(R, combineReducers, mapToObject as any, false);
+    const epics = factoryForRead(E, combineEpics, mapToValues, true);
 
 
     const epicMiddleware = createEpicMiddleware(epics);
