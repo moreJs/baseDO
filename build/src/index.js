@@ -15,7 +15,7 @@ const redux_1 = require("redux");
 const redux_observable_1 = require("redux-observable");
 const constant_1 = require("./constant");
 const util_1 = require("./util");
-const fetchGenerator = (config = {}, metadata) => {
+const fetchGenerator = (config = {}) => {
     const finallyConfig = __assign({}, util_1.defaultResponseProcesser, config);
     return actions$ => actions$.ofType(finallyConfig.filter_type)
         .mergeMap(action => {
@@ -40,7 +40,7 @@ const factoryForWrite = (type, needGenerator) => (name, config) => (target, prop
     const metadata = Reflect.getOwnMetadata(type, constant_1.__globalDao__) || new Map();
     let value = null;
     if (needGenerator) {
-        value = fetchGenerator(config, metadata);
+        value = fetchGenerator(config);
     }
     else {
         value = descriptor.value;

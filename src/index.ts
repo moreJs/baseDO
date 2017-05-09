@@ -14,7 +14,7 @@ import { __globalDao__, reducer as R, epic as E } from './constant';
 import { mapToObject, mapToValues, defaultResponseProcesser } from './util';
 
 
-const fetchGenerator = (config = {} , metadata) => {
+const fetchGenerator = (config = {}) => {
 
     const finallyConfig = {
         ...defaultResponseProcesser,
@@ -47,7 +47,7 @@ const factoryForWrite = (type: Symbol, needGenerator?: boolean) => (name: string
     let value = null;
 
     if(needGenerator) {
-        value = fetchGenerator(config, metadata);
+        value = fetchGenerator(config);
     }else {
         value = descriptor.value;
     }
