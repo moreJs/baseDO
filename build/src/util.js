@@ -8,9 +8,6 @@ exports.mapToObject = map => {
 };
 exports.mapToValues = map => {
     let value = [...map.values()];
-    if (value.length == 1) {
-        return value[0];
-    }
     return value;
 };
 exports.defaultResponseProcesser = {
