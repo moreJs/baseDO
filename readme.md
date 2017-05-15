@@ -34,7 +34,7 @@
             该注解用在dao对象的属性上，接受一个配置对象，该配置对象的具体要求后面会讲到。
    
 ```js
-import { reducer, epic, store } from '@ali/basedao';
+import { reducer, epic, store } from 'basedao';
 /**
 *   age: string
 *   name: string
@@ -89,9 +89,6 @@ const s = store();
 ```
 
 
-
-- 实际的demo
-   - http://gitlab.alibaba-inc.com/alisports-fed/baseDO-demo/blob/master/do/list.ts
 
 - todo list
    - 补充测试用例
