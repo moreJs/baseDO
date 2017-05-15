@@ -1,5 +1,5 @@
 {
-  "name": "@ali/basedao",
+  "name": "basedao",
   "version": "1.1.8",
   "description": "数据层一体式解决方案",
   "main": "build/index.js",
@@ -9,21 +9,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.alibaba-inc.com:alisports-fed/baseDO.git"
+    "url": "git@github.com:moreJs/baseDO.git"
   },
   "keywords": [
     "redux",
     "redux-observable"
   ],
-  "author": "jianlei.hjl@alibaba-inc.com",
+  "author": "huangjianlei.cool@163.com",
   "license": "MIT",
   "dependencies": {
     "redux": "^3.6.0",
     "redux-observable": "^0.14.1",
     "reflect-metadata": "^0.1.10",
     "rxjs": "^5.3.0"
-  },
-  "publishConfig": {
-    "registry": "http://registry.npm.alibaba-inc.com"
   }
 }
