@@ -21,7 +21,7 @@
 
 - how to use ?
 
-   - tnpm i @ali/basedao
+   - npm i basedao
    - 提供的api注解
         - reducer
             这个最容易理解，当我们把每个dao对象理解为数据库中的一个表的时候，reducer就代表这个表所支持的操作，以及对不同操作的不同处理逻辑。
